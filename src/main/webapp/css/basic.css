@@ -1,0 +1,516 @@
+/* CSS Document */
+body {
+	margin: 0px auto;
+	padding: 0px;
+	font-size: 12px;
+	background: #F3F3F3;
+	min-width: 1366px;
+}
+
+* {
+	margin: 0 auto;
+	padding: 0;
+	font-family: "微软雅黑";
+}
+
+ul li {
+	list-style-type: none;
+}
+
+header {
+	width: 100%;
+	height: 140px;
+	background: #fff;
+}
+
+header a {
+	text-decoration: none;
+}
+
+header .h_top {
+	height: 30px;
+	width: 100%;
+	background: #FAFAFA;
+	border-bottom: 1px solid #F4F4F4;
+}
+
+header .h_top>ul>li {
+	float: left;
+	height: 12px;
+	line-height: 12px;
+	margin-top: 8px;
+	margin-right: 10px;
+	padding-right: 10px;
+	padding-bottom: 2px;
+}
+
+header .h_top a {
+	text-decoration: none;
+}
+
+header .h_top .u_left {
+	height: 100%;
+	width: 33%; /*333.3px*/
+	margin: 0 22.4% 0 14%;
+	float: left;
+	clear: left;
+}
+
+header .h_top .u_left li {
+	border-right: 1px solid #CCC;
+	color: #666666;
+}
+
+header .h_top .u_left li a {
+	color: #FF3300;
+}
+
+header .h_top .u_left li a:hover {
+	text-decoration: underline;
+}
+
+header .h_top a:hover {
+	color: #FF3300;
+}
+
+header .h_top .u_left>li:nth-child(3) {
+	width: 9%;
+}
+
+header .h_top .u_left>li:nth-child(3) span {
+	background: url(../images/snakepuc.png) no-repeat left -291px;
+	display: inline-block;
+	width: 25%;
+	height: 100%;
+}
+
+header .h_top .u_left>li:nth-child(3) span:hover {
+	background: url(../images/snakepuc.png) no-repeat -12px -291px;
+}
+
+header .h_top .u_left>li:nth-child(3) a {
+	display: inline-block;
+	color: #666666;
+	margin-left: 5px;
+}
+
+header .h_top .u_left>li:nth-child(3) a:hover {
+	color: #FF3300;
+}
+
+header .h_top .u_left>li:last-child {
+	border: none;
+	background: url(../images/snakepuc.png) no-repeat -174px -344px;
+	padding-left: 16px;
+}
+
+header .h_top .u_left>li:last-child a {
+	margin-top: 1px;
+	display: inline-block;
+}
+
+#u_right>li {
+	margin-top: 0px;
+	height: 100%;
+	padding-right: 0px;
+	padding: 0px 8px;
+}
+
+#u_right a {
+	display: inline-block;
+	margin-top: 8px;
+}
+
+#u_right>li li:hover {
+	background: #dAdAdA;
+}
+
+.u_right>li {
+	float: left;
+}
+
+.u_right li a {
+	color: #666666;
+}
+
+.ulbox {
+	position: absolute;
+	background: #FFF;
+	border: 1px solid #d4d4d4;
+	border-top: none;
+	padding-bottom: 5px;
+	display: none;
+}
+
+.ulbox li {
+	clear: left;
+	padding-left: 19.5px;
+	padding-right: 39px;
+	height: 30px;
+	width: 55px;
+}
+
+.ulbox_fo {
+	position: absolute;
+	background: #FFF;
+	border: 1px solid #d4d4d4;
+	border-top: none;
+	padding-bottom: 5px;
+	display: none;
+}
+
+.ulbox_fo li {
+	clear: left;
+	padding: 0px 20px;
+	height: 30px;
+	width: 118px;
+}
+
+.ulbox_fo li:first-child {
+	float: left;
+	padding: 0xp;
+	height: 5px;
+	width: 59px;
+	border-top: 1px solid #d4d4d4;
+}
+
+.ulbox_more {
+	position: absolute;
+	background: #FFF;
+	border: 1px solid #d4d4d4;
+	border-top: none;
+	padding-bottom: 5px;
+	display: none;
+}
+
+.ulbox_more li {
+	clear: left;
+	padding: 0px 20px;
+	height: 30px;
+	width: 70px;
+}
+
+.ulbox_more li:first-child {
+	float: left;
+	padding: 0px;
+	height: 5px;
+	width: 36px;
+	border-top: 1px solid #d4d4d4;
+}
+
+.on {
+	background: #fff;
+	border-right: 1px solid #d4d4d4;
+	border-left: 1px solid #d4d4d4;
+}
+
+.u_right li:first-child a {
+	margin-left: 6px;
+}
+
+.u_right li:first-child>span:first-child {
+	background: url(../images/snakepuc.png) no-repeat -130px -201px;
+	display: inline-block;
+	height: 12px;
+	width: 12px;
+}
+
+.u_right li:last-child>span:first-child {
+	background: url(../images/snakepuc.png) no-repeat -130px -216px;
+	display: inline-block;
+	height: 12px;
+	width: 12px;
+}
+
+.u_right li:last-child a {
+	margin-left: 3px;
+}
+
+.u_right {
+	height: 30px;
+}
+
+.san {
+	background: url(../images/snakepuc.png) no-repeat -179px -178px;
+	/*178~185*/
+	width: 9px;
+	height: 9px;
+	margin-left: 10px;
+	display: inline-block;
+}
+
+header .h_bottom {
+	height: 109px;
+	width: 100%;
+	background: #FFF;
+	padding-top: 30px;
+}
+
+.hb_left {
+	width: 26%;
+	height: 80px;
+	float: left;
+	margin:23px 50px 0 10%;
+}
+
+.hb_left li {
+	float: left;
+}
+
+.h_bottom .hb_left li:first-child {
+	height: 71px;
+	width: 102px;
+	background: url(../images/snakepuc.png) no-repeat left -128px;
+}
+
+.h_bottom .hb_left li:nth-child(2) {
+	height: 73px;
+	width: 69px;
+	background: url(../images/snakepuc.png) left -320px;
+	margin: 0px 20px 0 10px;
+}
+
+.h_bottom .hb_left li:last-child p {
+	color: #999;
+}
+
+.h_bottom .hb_left li:last-child p a {
+	color: #999;
+}
+
+.h_bottom .hb_left li:last-child p a:hover {
+	text-decoration: underline;
+}
+
+.h_bottom .hb_left li:last-child>p:first-child {
+	color: #999;
+	font-size: 20px;
+}
+
+.hb_right {
+	float: left;
+	margin: 2.5% 0 0 0%;
+	width: 50%;
+	height: 120px;
+}
+
+.hb_right li {
+	float: left;
+	margin-right: 10px;
+	color: #999;
+	margin-top: 3px;
+}
+
+.hb_right li a {
+	color: #999;
+}
+
+.hb_right li a:hover {
+	color: #F98235;
+	text-decoration: underline;
+}
+
+.hb_right li:first-child {
+	margin-left: 110px;
+	width: 90%;
+}
+
+.hb_right li:first-child input {
+	height: 36px;
+	border: 3px solid #7DC24D;
+	border-left: none;
+	display: block;
+	float: left;
+	width: 69%;
+}
+
+.hb_right li:first-child input::-webkit-input-placeholder {
+	color: #7DC24D;
+}
+
+.hb_right li:first-child button:first-child {
+	height: 36px;
+	width: 66px;
+	border-left: 3px solid #7DC24D;
+	border-bottom: 3px solid #7DC24D;
+	border-top: 3px solid #7DC24D;
+	border-right: none;
+	background: #FAFAFC;
+	display: block;
+	float: left;
+	color: #000000;
+	font-size: 14px;
+	position: relative;
+	cursor: pointer;
+}
+
+.hb_right li:first-child button:first-child>span:first-child {
+	display: inline-block;
+	height: 10px;
+	width: 5px;
+	background: url(../images/snakepuc.png) no-repeat -179px -178px;
+	margin-left: 5px;
+	color: #999;
+}
+
+.hb_right li:first-child button:first-child>span:last-child {
+	border-right: 1px solid #eaeaea;
+	height: 30px;
+	width: 1px;
+	display: inline-block;
+	float: right;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+#hb_shan {
+	position: absolute;
+	height: 36px;
+	width: 61px;
+	border-left: 1px solid #eaeaea;
+	border-bottom: 1px solid #eaeaea;
+	border-right: 1px solid #eaeaea;
+	background: #FAFAFC;
+	color: #000000;
+	font-size: 14px;
+	display: none;
+	cursor: pointer;
+}
+
+#hb_shan a {
+	width: 100%;
+	height: 100%;
+	line-height: 35px;
+	margin-left: 11px;
+	display: inline-block;
+}
+
+.hb_right li:first-child button:last-child {
+	height: 36px;
+	width: 11%;
+	background: #3ABF5E;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+}
+
+.hb_right li:nth-child(2) {
+	clear: left;
+	margin-left: 110px;
+}
+
+.hb_right li:nth-child(3) {
+	color: #F98235;
+}
+
+menu {
+	width: 100%;
+	height: 40px;
+	background: #F98235;
+}
+
+menu ul {
+	maigin-left: 150px;
+	height: 100%;
+	width: 100%;
+}
+
+menu ul li {
+	float: left;
+	padding: 10.5px 15px;
+}
+
+menu ul li:hover {
+	background: #764c3a;
+	cursor: pointer;
+}
+
+menu ul li:first-child {
+	margin-left: 190px;
+}
+
+menu ul li a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 14px;
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+}
+
+.split {
+	width: 100%;
+}
+
+.advice {
+	height: 80px;
+	width: 40px;
+	position: absolute;
+	position: fixed;
+	top: 27.7%;
+	right: 11%;
+}
+
+.advice div {
+	width: 100%;
+	height: 50%;
+	background: url(../images/ritfloat-index.png) left top;
+}
+
+.advice p {
+	color: #ccc;
+	font-size: 12px;
+	background: #fff;
+	width: 38px;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+}
+
+.advice p:nth-child(2) {
+	padding-top: 3px;
+}
+
+.advice p:last-child {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 3px;
+}
+
+.erweima {
+	width: 108px;
+	height: 183px;
+	background: url(../images/ritcodeb%20-%20%E5%89%AF%E6%9C%AC.png);
+	position: absolute;
+	position: fixed;
+	top: 39.8%;
+	right:0;
+}
+
+.my_address_add_info input{
+	height: 25px;
+}
+
+.myButton {
+	align-items: flex-start;
+	text-align: center;
+	cursor: default;
+	color: buttontext;
+	padding: 2px 6px 3px;
+	border: 2px outset buttonface;
+	border-image-source: initial;
+	border-image-slice: initial;
+	border-image-width: initial;
+	border-image-outset: initial;
+	border-image-repeat: initial;
+	background-color: buttonface;
+	box-sizing: border-box;
+}
+
+#index_recommend{
+	margin-left:2.5px;
+}
+
+#category-container{
+    margin-left: 10px;
+}

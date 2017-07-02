@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间，与对应的对象的映射接口的全类名一致 -->
+
+<mapper namespace="com.l.bookCity.mapper.LuceneIndexMapper">
+
+	<select id="list" resultMap="indexListgoods">
+		select goodId,
+		goodTitle,price,bookOrSeriesId,star_level,goodsinfo.imgId imgId,imgPath,isSeries
+		<!-- ,editorCommend,contentDescribe,authorDescribe,conent,preface ,这些字段索引不做存储-->
+		,clickCount,originalCost,keywords,commentCount
+		<if test="isSeries != 1">
+		,bookId,bookName,bookAuthor,publishDate,publishCount,publishingHouse,printTime,printCount,ISBN,seriesName,bookSize,wordCount
+		</if>
+		from goodsinfo
+		<if test="isSeries != 1">
+			inner join book on bookOrSeriesId=bookId
+		</if>
+		inner join titleimg on goodsinfo.ImgId = titleimg.imgId
+	</select>
+	 
+
+	<resultMap type="com.l.bookCity.bean.GoodsInfo" id="indexListgoods">
+		<result column="goodId" property="goodId"/>
+		<result column="goodTitle" property="goodTitle"/>
+		<result column="price" property="price"/>
+		<result column="star_level" property="star_level"/>
+		<result column="isSeries" property="isSeries"/>
+		<result column="clickCount" property="clickCount"/>
+		<result column="originalCost" property="originalCost"/>
+		<result column="keywords" property="keywords"/>
+		<result column="commentCount" property="commentCount"/>
+		<association  property="bookOrSeries" resultMap="bookOfgoods"></association>
+		<collection property="imgs"  ofType="com.l.bookCity.bean.Image">
+			<result column="imgId" property="imgId"/>
+			<result column="imgPath" property="imgPath"/> 
+		</collection> 
+	</resultMap>
+	
+	<!--  <resultMap type="com.l.bookCity.bean.Image" id="selectImg">
+		<result column="imgId" property="imgId"/>
+		<result column="imgPath" property="imgPath"/>
+	</resultMap> -->
+	 
+	<resultMap type="com.l.bookCity.bean.Book" id="bookOfgoods">
+		<result column="bookId" property="bookId"/>
+		<result column="bookName" property="bookName"/>
+		<result column="bookAuthor" property="bookAuthor"/>
+		<result column="publishDate" property="publishDate"/>
+		<result column="publishCount" property="publishCount"/>
+		<result column="publishingHouse" property="publishingHouse"/>
+		<result column="printCount" property="printCount"/>
+		<result column="ISBN" property="ISBN"/>
+		<result column="bookSize" property="bookSize"/>
+		<result column="wordCount" property="wordCount"/>
+	</resultMap>
+
+</mapper>

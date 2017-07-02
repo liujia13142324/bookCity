@@ -1,0 +1,164 @@
+/* CSS Document */
+
+article{
+	width:958px;
+	height:1050px;
+}
+
+article>img:first-child{
+	margin:8px 0px;
+}
+.top{
+	width:100%;
+	height:80%;
+}
+
+.left{
+	width:75%;
+	height:100%;
+	margin-right:2.5%;
+	float:left
+}
+.left dl{
+	width:347px; 
+	height:393px;
+	background:#fff;
+	position:relative;
+	float:left;
+	margin-bottom:20px;
+	border:1px solid #ccc;
+}
+
+.left dl:first-child{
+	margin-right:20px;
+}
+
+.left dl:nth-child(3){
+	margin-right:20px;
+}
+
+.left dl dt>img:first-child{
+	width:347px;
+	height:230px;
+}
+
+.left dl dd{
+	color:#CCC;
+}
+
+
+.left dl dd h2{
+	font-size:15px;
+	color:#333;
+	font-family:"微软雅黑";
+	height:30px;
+	line-height:30px;
+}
+
+.left dl .price span{
+	font-size:24px;
+	font-weight:bold;
+	color:#FF4400;
+	margin-left:10px;
+	margin-right:10px;
+	text-align:left;
+	padding-top:5px;
+	display:inline-block;
+}
+
+.left dl .price {
+	margin-left:0px;
+	width:100%;
+	height:26px;
+	background:url(../images/btnbuyui.png) no-repeat left bottom;
+	position:absolute;
+	bottom:58px;
+	
+}
+
+.left dl .content{
+	margin-left:10px;
+	width:322px;
+	letter-spacing:1px;
+	margin-bottom:0px;
+}
+.look{
+	background:url(../images/btnbuyui.png) no-repeat left top;
+	position:absolute;
+	height:47px;
+	width:80px;
+	right:10px;
+	bottom:40px;
+}
+.look a{
+	width:100%;
+	height:100%;
+	display:inline-block;
+
+}
+
+.book{
+	background:url(../images/index-icobgnew.png) no-repeat left -36px;
+	position:absolute;
+	height:36px;
+	width:53px;
+	left:-2px;
+	top:15px;
+}
+
+.right{
+	width:22.5%;
+	height:100%;
+	float:left;
+}
+
+.right div{
+	margin-bottom:10px;
+	border:1px solid #ccc;
+	width:218px;
+}
+.right div:nth-child(2){
+	height:120px;
+}
+.right .r_v{
+	background:#fff;	
+	
+	padding-bottom:7px;
+	
+}
+.right .r_v img{
+	border-bottom:1px solid #ccc;
+}
+
+.bottom button{
+	height:30px;
+	width:75px;
+	background:#fff;
+	border:1px solid #ccc;
+	float:left;
+	font-size:12px;
+	border-bottom:none;
+}
+.bottom button:first-child{
+	margin-left:10px;
+}
+.bottom button:nth-child(2){
+	border-left:none;	
+}
+.bottom .a_sp{
+	clear:left;
+}
+.bottom ul li{
+	float:left;
+	margin-right:20px;
+	margin-top:15px;
+}
+.bottom ul li:first-child{
+	margin-left:10px;
+}
+.bottom ul li a{
+	text-decoration:none;
+	color:#666;
+}
+
+

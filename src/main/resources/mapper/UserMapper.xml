@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间，与对应的对象的映射接口的全类名一致 -->
+
+<mapper  namespace="com.l.bookCity.mapper.UserMapper">
+	<insert id="insertUser" parameterType="com.l.bookCity.bean.User">
+		
+		insert into users (uid,uname,udate,uemail) values(#{uid},#{uname},str_to_date(now(),'%Y-%m-%d %H:%i:%s'),#{uemail})
+		
+		  <selectKey keyProperty="uid" keyColumn="uid" resultType="int" order="AFTER">
+			select @@identity
+	 	 </selectKey>  
+	</insert>
+	
+	<insert id="inserAuthentication" parameterType="com.l.bookCity.bean.UserAutentication">
+		insert into userAuthentication (authenId,uid,authenType,authenIdentify,authenCheck,authenStatus)
+		 values(@identity,#{user.uid},#{authenType},#{authenIdentify},#{authenCheck},#{authenStatus})
+	</insert>
+	
+	
+	
+</mapper>

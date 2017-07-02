@@ -1,0 +1,39 @@
+/*公用部分*/
+*{margin:0;padding:0}
+body{ font-family:宋体,Arial,Helvetica,sans-serif; font-size:12px; color:#404040;}
+a{ text-decoration:none; color:#404040; }
+a:hover{text-decoration:underline;color:#009c74;}
+img{border:0}
+b{font-weight:normal}
+* ul,* ol,* li{list-style:none}
+h1,h2,h3,h4,h5,h6{font-size:12px;font-weight:normal}
+.clearfix,.mydang_con{zoom:1;}
+.clearfix:after,.mydang_con:after{ content: '.'; height: 0; display: block; clear: both; visibility: hidden; }
+.dot{ letter-spacing:-3px;}
+
+/*主结构*/
+.mydang{width:960px;margin:0 auto;}
+.mydang_break{padding:12px 0 11px 0;}
+.mydang_left{width:170px;float:left;border-top:4px solid #999;}
+.mydang_right{width:780px;float:right;}
+
+/*左栏导航*/
+.mydang_left_inner{border:1px solid #ddd;border-top:0px;}
+.mydang_left_inner .mydang_left_title{border-top:1px solid #ddd;border-bottom:1px solid #ddd;height:27px;line-height:27px;padding-left:10px;background-color:#f7f7f7;position:relative;}
+.mydang_left_inner .border_top0{border-top:0px;}
+.mydang_left_inner .mydang_left_title{font-size:14px;font-family:"微软雅黑";font-weight:bold;}
+.mydang_left_inner .mydang_left_title  a{color:#404040;}
+.mydang_left_inner .mydang_left_title  a:hover{color:#009c74;}
+
+
+.mydang_left_inner .mydang_left_title .slide_down,.mydang_left_inner .mydang_left_title .slide_up{display:block;height:15px;width:15px;background:url(http://img4.ddimg.cn/mydd/mydangdang_icon.png) 3px 4px no-repeat;position:absolute;right:8px;top:6px;}
+.mydang_left_inner .mydang_left_title .slide_down{background-position:-14px 6px;}
+.mydang_left_inner ul {padding:4px 0px;}
+.mydang_left_inner ul li{line-height:25px;height:25px;}
+.mydang_left_inner ul li a span{color:#c30;font-family:"宋体";}
+.mydang_left_inner ul li a{display:block;padding-left:23px;color:#404040;}
+.mydang_left_inner ul li a:link,.mydang_left_inner ul li a:visited,.mydang_left_inner ul li a.active{color:#404040;}
+.mydang_left_inner ul li a:hover{text-decoration:underline;color:#009c74;}
+.mydang_left_inner ul li a.on,.mydang_left_inner ul li a.on:link,.mydang_left_inner ul li a.on:visited,.mydang_left_inner ul li a.on:active{font-weight:bold;color:#009c74;background:url(http://img4.ddimg.cn/mydd/mydangdang_icon.png) -81px 8px no-repeat;}
+.mydang_left_inner ul li .disable{color:#878787;}
+.mydang_left_inner .my_href, .mydang_left_inner .my_content {width:165px;}/*dry100720 修改*/

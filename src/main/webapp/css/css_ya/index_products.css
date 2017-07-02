@@ -1,0 +1,32 @@
+#index_recommend{
+	font-size: 13px;
+    line-height: 19px;
+    color: #111;
+    font-family: Arial,sans-serif;
+    font-family: 'Hiragino Sans GB','Microsoft Yahei',Arial,sans-serif;
+	 width: 760px;
+}
+
+#index_recommend .category-header{
+	font-size: 21px;
+    line-height: 20px;
+    font-weight: bold;
+    margin-bottom: 0px;
+    text-align: center!important;
+}
+
+#recomment_detail .ch-tabwidget-asintitle{
+	 text-align: center!important;
+}
+.ch-tabwidget-price{
+	text-align: center!important;
+}
+.ch-tabwidget-pc-contentlist .ch-tabwidget-pc-contentAsin{
+	margin:0px 20px;
+}
+#recomment_detail .ch-tabwidget-starbk{
+	margin-left:50px;
+}
+#recomment_detail .ch-tabwidget-review{
+	margin-left:130px;
+}

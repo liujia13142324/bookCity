@@ -1,0 +1,36 @@
+a, b, body, div, form, html, img, label, span {
+	margin: 0 auto;
+	padding: 0 0;
+}
+
+footer {
+	font: 12px/150% Arial, Verdana, "\5b8b\4f53";
+	color: #666;
+}
+
+footer a {
+	color: #666;
+	text-decoration: none;
+}
+
+#footer-2013 .links a, UNUSED#footer-2013 .links span {
+	margin: 0 10px;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.w {
+	width: 990px;
+	margin: 0 auto
+}
+
+#footer-2013 {
+	padding-bottom: 30px;
+	text-align: center;
+}
+
+#footer-2013 .copyright {
+	margin: 10px 0;
+}

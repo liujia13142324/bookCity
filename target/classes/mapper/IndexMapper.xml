@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间，与对应的对象的映射接口的全类名一致 -->
+
+<mapper namespace="com.l.bookCity.mapper.IndexMapper">
+	<select id="selectNavigation" resultType="com.l.bookCity.bean.Navigation">
+		select
+		menuId,menuName,fid from navigation where fid is null or fid in
+		(select menuId from navigation where fid is null)
+	</select>
+
+	<select id="selectGoodsOfRecommend" resultType="com.l.bookCity.bean.GoodsInfo" resultMap="recommentGoods">
+		select
+		goodId,goodTitle,price,goodsinfo.imgId,imgPath,clickCount,star_level from goodsinfo
+		inner join titleimg on titleimg.imgId =goodsinfo.imgId 
+		limit 18
+	</select>
+	
+	<resultMap type="com.l.bookCity.bean.GoodsInfo" id="recommentGoods">
+		<result column="goodId" property="goodId"/>
+		<result column="goodTitle" property="goodTitle"/>
+		<result column="price" property="price"/>
+		<result column="star_level" property="star_level"/>
+		<result column="clickCount" property="clickCount"/>
+		<collection property="imgs"  ofType="com.l.bookCity.bean.Image">
+			<result column="imgId" property="imgId"/>
+			<result column="imgPath" property="imgPath"/> 
+		</collection> 
+	</resultMap>
+	
+</mapper>

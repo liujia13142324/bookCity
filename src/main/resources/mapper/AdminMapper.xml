@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 命名空间，与对应的对象的映射接口的全类名一致 -->
+
+<mapper  namespace="com.l.bookCity.mapper.AdminMapper">
+
+	<select id="selectAdmin" parameterType="com.l.bookCity.bean.Admin" resultType="com.l.bookCity.bean.Admin">
+		select adminName,adminAbility from admins
+		 where adminName=#{adminName} and adminPassword=#{adminPassword} and  adminAbility>0
+	</select>
+	
+	
+	<resultMap type="com.l.bookCity.bean.PaginationBean" id="selectAdminPage">
+		<result column="currPage" property="page" />
+		<result column="pageSize" property="pageSize" />
+		<collection property="rows" column="{currIndex=currIndex,pageSize=pageSize" select="selecAdminRows"></collection>
+	</resultMap>
+	
+	<select id="selectAllByPage" parameterType="com.l.bookCity.bean.PaginationBean" resultMap="selectAdminPage">
+		select count(1) total ,ceil(count(1)/${pageSize}) allPage,${pageSize} pageSize,${page} currPage,(${page}-1)*${pageSize} currIndex from admins
+	</select>
+	
+	
+	<select id="selecAdminRows" resultMap="allAdminInfo">
+		select e.eid eid,ename,eposition,esalary,ebonus,ephone,adminName,adminAbility from admins a
+		inner join employee e on a.eid = e.eid 
+		limit ${currIndex} , ${pageSize}
+	</select>
+	
+	<resultMap type="com.l.bookCity.bean.Admin" id="allAdminInfo">
+		<result column="adminName" property="adminName"/>
+		<result column="adminAbility" property="adminAbility"/>
+		<association property="employee" resultMap="EmpOfAdmin"></association>
+	</resultMap>
+	
+	<resultMap type="com.l.bookCity.bean.Employee" id="EmpOfAdmin">
+		<result column="eid" property="eid"/>
+		<result column="ename" property="ename"/>
+		<result column="eposition" property="eposition"/>
+		<result column="esalary" property="esalary"/>
+		<result column="ebonus" property="ebonus"/>
+		<result column="ephone" property="ephone"/>
+	</resultMap>
+	
+	<select id="selectAdminIsExist" resultType="boolean" parameterType="String">
+		select count(1) from admins where adminName=#{_parameter}
+	</select>
+	
+	<select id="test" parameterType="int" resultType="boolean">
+		select count(1) from navigation where fid=#{id}
+	</select>
+	
+	<select id="selectAllEmps" resultType="com.l.bookCity.bean.Employee">
+		select eid,ename,eposition,ephone from employee
+	</select>
+	
+	
+	<insert id="insertAdminWithExitEmp" parameterType="com.l.bookCity.bean.Admin">
+		insert into admins(adminName,adminPassword,adminAbility,eid ) 
+		values(#{adminName},#{adminPassword},#{adminAbility},#{employee.eid} )          
+	</insert>
+	
+	<insert id="insertEmp" parameterType="com.l.bookCity.bean.Employee">
+		insert into employee(eid,ename,eposition,ephone) 
+		values (nextval('eid'),#{ename},#{eposition},#{ephone})
+		<selectKey keyProperty="eid" keyColumn="eid"  resultType="int" order="AFTER">
+			select currval('eid') eid
+		</selectKey>
+	</insert>
+	
+	<update id="stopAdmin" parameterType="String" >
+		update admins set adminAbility = -1 where adminName=#{_parameter}
+	</update>
+	
+	
+	<update id="updateAdmin" >
+		update admins set adminName=#{arg0.adminName} 
+		<if test="arg0.adminPassword != null">
+			,adminPassword=#{arg0.adminPassword} 
+		</if> 
+		,adminAbility=#{arg0.adminAbility}
+		where adminName=#{arg1}
+	</update> 
+	
+	
+	<resultMap type="com.l.bookCity.bean.PaginationBean" id="selectPage">
+		<result column="currPage" property="page"/>
+		<result column="pageSize" property="pageSize"/>
+		<collection property="rows" column="{currIndex=currIndex,pageSize=pageSize" select="selecRows"></collection>
+	</resultMap>
+														
+	<select id="selectGoodsOfSearchResult" parameterType="com.l.bookCity.bean.PaginationBean" resultMap="selectPage">
+		select count(1) total ,ceil(count(1)/${pageSize}) allPage,${pageSize} pageSize,${page} currPage,(${page}-1)*${pageSize} currIndex from goodsinfo
+	</select>
+	
+	<select id="selecRows" resultType="com.l.bookCity.bean.GoodsInfo" resultMap="adminListGoods">
+		select goodId,goodTitle,goodsinfo.imgId,imgPath,eprice,price,originalCost,
+		star_level,isSeries,clickCount,commentCount,keywords
+		<if test="isSeries != 1">
+		,bookId,bookName,bookAuthor,publishDate,publishCount,publishingHouse,printTime,printCount,ISBN,seriesName,bookSize,wordCount
+		</if>
+		from goodsinfo 
+		<if test="isSeries != 1">
+			inner join book on bookOrSeriesId=bookId
+		</if>
+		inner join titleimg on titleimg.imgId = goodsinfo.imgId
+		limit ${currIndex} , ${pageSize}
+	</select> 
+	
+	<resultMap type="com.l.bookCity.bean.GoodsInfo" id="adminListGoods">
+		<result column="goodId" property="goodId"/>
+		<result column="goodTitle" property="goodTitle"/>
+		<result column="price" property="price"/>
+		<result column="eprice" property="eprice"/>
+		<result column="star_level" property="star_level"/>
+		<result column="isSeries" property="isSeries"/>
+		<result column="clickCount" property="clickCount"/>
+		<result column="originalCost" property="originalCost"/>
+		<result column="keywords" property="keywords"/>
+		<result column="commentCount" property="commentCount"/>
+		<association  property="bookOrSeries" resultMap="bookOfgoods"></association>
+		<collection property="imgs"  ofType="com.l.bookCity.bean.Image">
+			<result column="imgId" property="imgId"/>
+			<result column="imgPath" property="imgPath"/> 
+		</collection> 
+	</resultMap>
+	 
+	<resultMap type="com.l.bookCity.bean.Book" id="bookOfgoods">
+		<result column="bookId" property="bookId"/>
+		<result column="bookName" property="bookName"/>
+		<result column="bookAuthor" property="bookAuthor"/>
+		<result column="publishDate" property="publishDate"/>
+		<result column="publishCount" property="publishCount"/>
+		<result column="publishingHouse" property="publishingHouse"/>
+		<result column="printCount" property="printCount"/>
+		<result column="ISBN" property="ISBN"/>
+		<result column="bookSize" property="bookSize"/>
+		<result column="wordCount" property="wordCount"/>
+	</resultMap>
+</mapper>
