@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.l.bookCity.bean.Admin;
 import com.l.bookCity.bean.Emp;
 import com.l.bookCity.bean.GoodsInfo;
+import com.l.bookCity.bean.Image;
 import com.l.bookCity.bean.PaginationBean;
 import com.l.bookCity.service.AdminService;
 import com.l.bookCity.util.PrintUtil;
@@ -131,5 +132,6 @@ public class AdminHandler {
 		LogManager.getLogger().debug(PrintUtil.printFormat("Web 管理员请求查看所有商品信息..."));
 		return adminService.listGoods(page, rows);
 	}
+	
 	
 }

@@ -32,6 +32,14 @@ $.extend($.fn.validatebox.defaults.rules, {
         },    
         message: '该字段至少{0}位'   
     }  ,
+    numberOrDecimal:{
+    	validator: function(value, param){    
+    		var patrn = /^\d+(\.\d+)?$/;
+            return patrn.exec(value);    
+        },    
+        message: '请输入正确的数字！' 
+    },
+    
     // remote方法默认的提示信息不友好，校验用户的时候有多种校验（唯一、长度），所以不能靠 invalidMessage只有一种提示信息
     // 把异步请求变成同步，不然在异步没有处理完之前，方法会自动返回false而导致一直是校验错误状态
     onlyName:{

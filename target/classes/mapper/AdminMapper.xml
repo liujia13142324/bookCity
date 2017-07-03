@@ -107,6 +107,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		inner join titleimg on titleimg.imgId = goodsinfo.imgId
 		limit ${currIndex} , ${pageSize}
+		
+		
 	</select> 
 	
 	<resultMap type="com.l.bookCity.bean.GoodsInfo" id="adminListGoods">
@@ -121,11 +123,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="keywords" property="keywords"/>
 		<result column="commentCount" property="commentCount"/>
 		<association  property="bookOrSeries" resultMap="bookOfgoods"></association>
-		<collection property="imgs"  ofType="com.l.bookCity.bean.Image">
-			<result column="imgId" property="imgId"/>
-			<result column="imgPath" property="imgPath"/> 
-		</collection> 
+		
+		<collection property="imgs" column="{imgId=imgId" select="selectImg"></collection> 
 	</resultMap>
+	
+	<select id="selectImg" resultType="com.l.bookCity.bean.Image">
+		select imgid, imgPath from titleimg where imgid=${imgId}
+		union
+		select imgid, imgPath from subimg where imgid=${imgId}
+	</select>
 	 
 	<resultMap type="com.l.bookCity.bean.Book" id="bookOfgoods">
 		<result column="bookId" property="bookId"/>

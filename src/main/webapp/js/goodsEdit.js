@@ -1,21 +1,39 @@
+var editorRow ;
 $('#editGoods').datagrid({    
 	    url:'admin/getGoodsList',
 		fitColumns:true,
 		singleSelect:true,
 		pagination:true,
+		toolbar: '#tb',
 	    columns:[[  
 	    	{field:'goodId',title:'商品号',width:40,align:'center'}, 
-	        {field:'goodTitle',title:'商品标题',width:50,align:'center'},    
-	        {field:'bookOrSeries',title:'商品号/套装号',width:40,align:'center',
+	        {field:'goodTitle',title:'商品标题',width:50,align:'center',editor: { type: 'validatebox', options: { required: true} }},    
+	        {field:'bookOrSeries',title:'书籍号/套装号',width:40,align:'center',
 	        	formatter :function(value,row,index){
 	        		return row.bookOrSeries.bookId
 	        	}
 	        }, 
-	        {field:'price',title:'价格',width:40,align:'center'}, 
-	        {field:'eprice',title:'电子书价格',width:30,align:'center'}, 
+		        {field:'price',title:'价格',width:40,align:'center',
+	        	
+	        	editor:{type:'validatebox' ,
+	        		options:{
+	        			required:true,
+	        			validType:'numberOrDecimal[]'
+	        		}
+		        }
+	        }, 
+	        {field:'eprice',title:'电子书价格',width:30,align:'center',
+	        	editor:{type:'validatebox' ,
+	        		options:{
+	        			required:true,
+	        			validType:'numberOrDecimal[]'
+	        		}
+		        }
+	        },
 	        {field:'originalCost',title:'原价',width:30,align:'center'},
 	        {field:'star_level',title:'评价星级',width:30,align:'center'},
-	        //TODO 修改数据库，建立图片关系模式
+	        
+	        //TODO 修改数据库，建立图片关系模式 ， 设计可设置多张图片方案
 	        {field:'imgs',title:'商品图片',width:50,align:'center',
 	        	formatter :function(value,row,index){
 	        		return "<img style='width:100px;height:100px' src='"+row.imgs[0].imgPath+"'/>"
@@ -36,31 +54,156 @@ $('#editGoods').datagrid({
 	        	formatter :function(value,row,index){
 	        		if(value!=null && value!='undefine'){
 	        			console.info(value+"  "+value.length)
-		        		return "<div style='height:"+value.length/6*20+"px; white-space: normal;'>"+value+"</div>";
+		        		return "<div style='height:"+value.length/6*29+"px; white-space: normal;'>"+value+"</div>";
 	        		}
-	        	} 
+	        	} ,
+	        	//TODO 可设置关键字最大长度为20个汉字
+	        	editor:"text"
 	        },
 	        {field:'operator',title:'操作',width:60,align:'center',
 	        	formatter :function(value,row,index){
-	        		var fun1 ='<a class="opBtn" href="javascript:void(0);" onClick="OpWindow(this.innerText,'+index+')">修改</a> &nbsp;'
 	        		var fun2
-	        		if(row.adminAbility < 0 || row.adminAbility > 100){
-	        			fun2 = '<a class="opBtn" href="javascript:void(0);" data-options="disabled:true"  onClick="OpWindow(this.innerText,'+index+')">停用</a>';
-	        		}else{
-	        			fun2 ='<a class="opBtn" href="javascript:void(0);" onClick="OpWindow(this.innerText,'+index+')">停用</a>';
-	        		}
-	        		
-	        		var str = fun1+fun2;
+        			fun2 = '<a class="opBtn" href="javascript:void(0);"  onClick="OpWindow(this.innerText,'+index+')">下架</a>';
+	        		var str = fun2;
 	        		str+="<script>$('.opBtn').linkbutton({});</script>";
 	        		return str;
 	        	}
 	        },
-	    ]]    
+	        
+	    ]] ,
+	   
+		onDblClickCell: function(index,field,value){
+			$(this).datagrid('beginEdit', index);
+			var ed = $(this).datagrid('getEditor', {index:index,field:field});
+			if(ed != null && ed != 'undefine'){
+				$(ed.target).focus();
+			}
+			editorRow = index;
+		},
+
+		onSelect:function(index,row){
+			$(this).datagrid('endEdit', editorRow);
+		},
+		onClickCell:function(index, field, value){
+			if(field == 'imgs'){
+			    var rows = $('#editGoods').datagrid('getRows');
+			    var row = rows[index];
+				openImgs(row,index);
+			}
+		}
+
+		
+		
 	});
 
+/*	这种可编辑表格无法显示哪些可以修改，哪些不能修改
+ * $.extend($.fn.datagrid.methods, {
+	editCell: function(jq,param){
+		return jq.each(function(){
+			var opts = $(this).datagrid('options');
+			var fields = $(this).datagrid('getColumnFields',true).concat($(this).datagrid('getColumnFields'));
+			for(var i=0; i<fields.length; i++){
+				var col = $(this).datagrid('getColumnOption', fields[i]);
+				col.editor1 = col.editor;
+				if (fields[i] != param.field){
+					col.editor = null;
+				}
+			}
+			$(this).datagrid('beginEdit', param.index);
+            var ed = $(this).datagrid('getEditor', param);
+            if (ed){
+                if ($(ed.target).hasClass('textbox-f')){
+                    $(ed.target).textbox('textbox').focus();
+                } else {
+                    $(ed.target).focus();
+                }
+            }
+			for(var i=0; i<fields.length; i++){
+				var col = $(this).datagrid('getColumnOption', fields[i]);
+				col.editor = col.editor1;
+			}
+		});
+	},
+    enableCellEditing: function(jq){
+        return jq.each(function(){
+            var dg = $(this);
+            var opts = dg.datagrid('options');
+            opts.oldOnClickCell = opts.onClickCell;
+            opts.onClickCell = function(index, field){
+                if (opts.editIndex != undefined){
+                    if (dg.datagrid('validateRow', opts.editIndex)){
+                        dg.datagrid('endEdit', opts.editIndex);
+                        opts.editIndex = undefined;
+                    } else {
+                        return;
+                    }
+                }
+                dg.datagrid('selectRow', index).datagrid('editCell', {
+                    index: index,
+                    field: field
+                });
+                opts.editIndex = index;
+                opts.oldOnClickCell.call(this, index, field);
+            }
+        });
+    }
+});
+
+$(function(){
+	$('#editGoods').datagrid().datagrid('enableCellEditing');
+})*/
 
 
-
+function openImgs(row,index){
+	$("<div></div>").dialog({
+		id:"lookImg",
+		title:'查看商品图片',
+		width:700,
+		height:400,
+		left:300,
+		top:60 + $(document).scrollTop(),
+		resizable:true,
+		maximizable:true,
+		modal:true,
+		href:"admin/manager/lookImg.jsp",
+		onClose:function(){
+			 $(this).dialog('destroy');
+		},
+		onLoad:function(){
+			
+			var imgs = row.imgs;
+			$("#mainImg").attr("src",imgs[0].imgPath);
+			$("#mainImg").attr("rowIndex",index);
+			for(var i=0 ; i<imgs.length ; i++){
+				//默认第一张是选中的标题图片
+				if( i == 0 ){
+					$("#imglist").append('<img src=/bookCity/'+imgs[i].imgPath+' imgIndex='+i+' class="selected" style="width:50px;height:50px;" onclick="changeImg(this);"/>');
+				}else{
+					$("#imglist").append('<img src=/bookCity/'+imgs[i].imgPath+' imgIndex='+i+' style="width:50px;height:50px;" onclick="changeImg(this);"/>');
+				}
+			}
+			
+			$("img").dblclick(function(){
+				var selectedIndex = $(this).attr("imgIndex");
+				var temp = imgs[0] ;
+				imgs[0] = imgs[selectedIndex];
+				imgs[selectedIndex]=temp;
+				updateImg(index,imgs);
+				closeWind("lookImg");
+			})
+			
+		}
+	});
+}
+function updateImg(index,imgs){
+	$('#editGoods').datagrid('updateRow',{
+			index: index,
+			row:{
+				imgs:imgs
+        }
+	})
+	$('#editGoods').datagrid('refreshRow',index);
+}
 
 function OpWindow(opStr,index){
 	switch(opStr){
@@ -127,3 +270,4 @@ function openMA(index){
 		}
 	});
 }
+

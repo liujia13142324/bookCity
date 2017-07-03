@@ -12,7 +12,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 import com.l.bookCity.service.LuceneIndexService;
 import com.l.bookCity.util.PrintUtil;
 
-/*@WebListener*/
+@WebListener
 public class LoadIndexListener implements ServletContextListener {
 
 	@Autowired
