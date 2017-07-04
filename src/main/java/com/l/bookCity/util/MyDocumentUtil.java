@@ -14,13 +14,20 @@ public class MyDocumentUtil<T> {
 	
 	public static Document field2Doc(IndexField fields) {
 		Document doc = new Document();
+		//存储不索引
 		doc.add(new NumericField("id",Field.Store.YES,false).setIntValue(fields.getId()));
+		//存储，不索引，不分词，但是luck中可以看见，只是未分词
 		doc.add(new Field("picPath",fields.getPicPath(),Field.Store.YES,Field.Index.NOT_ANALYZED_NO_NORMS));
 		doc.add(new Field("title",fields.getGoodTitle(),Field.Store.YES,Field.Index.ANALYZED));
+		//存储不索引
 		doc.add(new NumericField("price",Field.Store.YES,true).setFloatValue(fields.getPrice()));
+		//存储不索引
 		doc.add(new NumericField("originalCost",Field.Store.YES,true).setFloatValue(fields.getOriginalCost()));
+		//存储不索引
 		doc.add(new NumericField("clickCount",Field.Store.YES,true).setIntValue(fields.getClickCount()));
+		//存储不索引
 		doc.add(new NumericField("star_level",Field.Store.YES,false).setIntValue(fields.getStar_level()));
+		//存储不索引
 		doc.add(new NumericField("commentCount",Field.Store.YES,true).setIntValue(fields.getCommentCount()));
 		doc.add(new Field("keywords",fields.getKeywords()==null?"":fields.getKeywords() ,Field.Store.YES,Field.Index.ANALYZED));
 		doc.add(new Field("bookAuthor",fields.getBookAuthor(),Field.Store.YES,Field.Index.ANALYZED));
@@ -36,7 +43,7 @@ public class MyDocumentUtil<T> {
 	public static IndexField GoodsInfo2IndexField(GoodsInfo goods){
 		
 		IndexField field = new IndexField();
-		
+		// field的id即商品的id
 		field.setId(goods.getGoodId());
 		
 		field.setGoodTitle(goods.getGoodTitle());

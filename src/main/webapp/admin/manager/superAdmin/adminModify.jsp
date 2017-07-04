@@ -119,7 +119,7 @@ $("#modifyAdmin").form({
 
 function modifyAdmin(){
 	
-	if(document.getElementById("mSelectPostion")!=null && document.getElemenetById("mSelectPostion") !="undefine" ){
+	if(document.getElementById("mSelectPostion")!=null && document.getElementById("mSelectPostion") !="undefine" ){
 		var webPosition = $("#mSelectPostion").combobox("getText");
 		setWebPosition(webPosition,addParam)
 	}

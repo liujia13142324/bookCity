@@ -170,28 +170,47 @@ function openImgs(row,index){
 			 $(this).dialog('destroy');
 		},
 		onLoad:function(){
-			
 			var imgs = row.imgs;
 			$("#mainImg").attr("src",imgs[0].imgPath);
 			$("#mainImg").attr("rowIndex",index);
 			for(var i=0 ; i<imgs.length ; i++){
 				//默认第一张是选中的标题图片
 				if( i == 0 ){
-					$("#imglist").append('<img src=/bookCity/'+imgs[i].imgPath+' imgIndex='+i+' class="selected" style="width:50px;height:50px;" onclick="changeImg(this);"/>');
+					$("#imglist").append('<img src=/bookCity/'+imgs[i].imgPath+' imgIndex='+i+' class="listImg selected" style="width:50px;height:50px;"/>');
 				}else{
-					$("#imglist").append('<img src=/bookCity/'+imgs[i].imgPath+' imgIndex='+i+' style="width:50px;height:50px;" onclick="changeImg(this);"/>');
+					$("#imglist").append('<img src=/bookCity/'+imgs[i].imgPath+' imgIndex='+i+' class="listImg" style="width:50px;height:50px;" />');
 				}
 			}
-			
-			$("img").dblclick(function(){
-				var selectedIndex = $(this).attr("imgIndex");
-				var temp = imgs[0] ;
-				imgs[0] = imgs[selectedIndex];
-				imgs[selectedIndex]=temp;
-				updateImg(index,imgs);
-				closeWind("lookImg");
+			$(".listImg").on({
+				dblclick:function(){
+					var selectedIndex = $(this).attr("imgIndex");
+					var temp = imgs[0] ;
+					imgs[0] = imgs[selectedIndex];
+					imgs[selectedIndex]=temp;
+					updateImg(index,imgs);
+					closeWind("lookImg");
+				},
+				click:function () {
+					$(".selected").removeClass("selected");
+					$(this).addClass("selected");
+					$("#mainImg").attr("src", $(this).attr("src"))
+				},
+				contextmenu:function(e){
+					//右击图片的时候，body或者document的菜单时间去除，以显示图片的菜单事件
+					$('#lookImg').unbind()
+					$("#menu").menu("hideItem",$("#exit")[0])
+					$("#menu").menu("hideItem",$("#upload")[0])
+					$("#menu").menu("showItem",$("#delete")[0])
+					e.preventDefault();
+					$('#menu').menu('show', {
+						left : e.pageX,
+						top : e.pageY
+					});
+					// 切记！！ 千万不要在这里写恢复 body或者document的菜单事件，因为easyui的方法都是异步，
+					//在上面的 show方法还没执行完，下面就已经运行完，也就恢复了原先的事件，就不会有期待的效果
+				}
+				
 			})
-			
 		}
 	});
 }

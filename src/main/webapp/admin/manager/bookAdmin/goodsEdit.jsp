@@ -6,7 +6,6 @@
 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">提交索引</a>
 <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-large-shapes',plain:true">索引入库</a>
 <a style="margin-right:20px;" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-mini-refresh',plain:true">索引重构</a>
-
 </div>
 
 </table>
